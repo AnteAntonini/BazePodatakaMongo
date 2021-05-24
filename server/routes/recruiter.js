@@ -28,6 +28,8 @@ router.post('/recruiter', async (req, res) => {
 router.get('/recruiter', async (req, res) => {
     try {
         let recruiter = await Recruiter.find()
+        .populate('user')
+        .exec();
 
         res.json({
             success: true,
@@ -45,6 +47,8 @@ router.get('/recruiter', async (req, res) => {
 router.get('/recruiter/:id', async (req, res) => {
     try {
         let recruiter = await Recruiter.findOne({_id: req.params.id}) 
+            .populate('user')
+            .exec();
             
         res.json({
             success: true,
@@ -70,6 +74,7 @@ router.put('/recruiter/:id', async (req, res) => {
                 location : req.body.location,
                 created_at : req.body.created_at,
                 updated_at : req.body.updated_at,
+                user: req.body.user_id
             }
         },
         {upsert: true});  //when doesn't exist create new one

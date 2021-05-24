@@ -28,6 +28,9 @@ router.post('/review', async (req, res) => {
 router.get('/review', async (req, res) => {
     try {
         let review = await Review.find()
+        .populate('user')
+        .exec();
+
 
         res.json({
             success: true,
@@ -45,6 +48,9 @@ router.get('/review', async (req, res) => {
 router.get('/review/:id', async (req, res) => {
     try {
         let review = await Review.findOne({_id: req.params.id}) 
+            .populate('user')
+            .exec();
+
             
         res.json({
             success: true,
@@ -70,6 +76,7 @@ router.put('/review/:id', async (req, res) => {
                 rating : req.body.rating,
                 created_at : req.body.created_at,
                 updated_at : req.body.updated_at,
+                user: req.body.user_id
             }
         },
         {upsert: true});  //when doesn't exist create new one

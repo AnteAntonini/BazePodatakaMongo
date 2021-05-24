@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const JobSchema = new Schema({
-    recruiter_id: { type: Schema.Types.ObjectId, ref: 'Recruiter'},
+    recruiter: { type: Schema.Types.ObjectId, ref: 'Recruiter'},
     title: String,
     description: String,
     finished: Number,

@@ -29,6 +29,8 @@ router.post('/jobs', async (req, res) => {
 router.get('/jobs', async (req, res) => {
     try {
         let jobs = await Jobs.find()
+        .populate('recruiter')
+        .exec();
 
         res.json({
             success: true,
@@ -45,7 +47,9 @@ router.get('/jobs', async (req, res) => {
 // GET request - get a single job
 router.get('/jobs/:id', async (req, res) => {
     try {
-        let jobs = await Jobs.findOne({_id: req.params.id}) 
+        let jobs = await Jobs.findOne({_id: req.params.id})
+            .populate('recruiter')
+            .exec(); 
             
         res.json({
             success: true,
@@ -71,6 +75,7 @@ router.put('/jobs/:id', async (req, res) => {
                 description : req.body.description,
                 finished : req.body.photo,
                 in_progress : req.body.price,
+                recruiter: req.body.recruiter_id,
             }
         },
         {upsert: true});  //when doesn't exist create new one
