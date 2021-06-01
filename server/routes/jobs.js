@@ -8,8 +8,8 @@ router.post('/jobs', async (req, res) => {
         jobs.title = req.body.title;
         jobs.description = req.body.description;
         jobs.finished = req.body.finished;
-        jobs.in_progress = req.body.price;
-        jobs.skillID = req.body.skillID;
+        jobs.in_progress = req.body.in_progress;
+        jobs.skill = req.body.skillID;
 
         await jobs.save();  
 
