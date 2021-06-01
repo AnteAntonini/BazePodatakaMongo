@@ -9,6 +9,7 @@ router.post('/jobs', async (req, res) => {
         jobs.description = req.body.description;
         jobs.finished = req.body.finished;
         jobs.in_progress = req.body.price;
+        jobs.skillID = req.body.skillID;
 
         await jobs.save();  
 
@@ -75,7 +76,7 @@ router.put('/jobs/:id', async (req, res) => {
                 description : req.body.description,
                 finished : req.body.photo,
                 in_progress : req.body.price,
-                skill: req.body.skill_id,
+                skill: req.body.skillID,
             }
         },
         {upsert: true});  //when doesn't exist create new one
