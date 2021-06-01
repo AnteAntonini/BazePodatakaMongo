@@ -29,7 +29,7 @@ router.post('/jobs', async (req, res) => {
 router.get('/jobs', async (req, res) => {
     try {
         let jobs = await Jobs.find()
-        .populate('[recruiter]')
+        .populate('[skill]')
         .exec();
 
         res.json({
@@ -48,7 +48,7 @@ router.get('/jobs', async (req, res) => {
 router.get('/jobs/:id', async (req, res) => {
     try {
         let jobs = await Jobs.findOne({_id: req.params.id})
-            .populate('[recruiter]')
+            .populate('[skill]')
             .exec(); 
             
         res.json({
